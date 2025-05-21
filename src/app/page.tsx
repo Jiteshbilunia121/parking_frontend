@@ -1,61 +1,69 @@
-'use client';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import Image from "next/image";
-import { useRouter } from 'next/navigation';
-import "./globals.css"
+// 'use client';
+// import Link from 'next/link';
+// import { useEffect, useState } from 'react';
+// import Image from "next/image";
+// import { useRouter } from 'next/navigation';
+// import "./globals.css";
+// import { FaCar } from 'react-icons/fa';
+// import { motion } from 'framer-motion';
 
 
-export default function Home() { 
-  const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // useEffect(() => {
-  //   // Check if JWT token exists in localStorage
-  //   const token = localStorage.getItem('token');
-  //   if(token)
-  //     router.push('/dashboard');
-  //   setIsLoggedIn(!!token);
-  // }, []);
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   setIsLoggedIn(!!token);
 
-  //   if (token && window.location.pathname === '/') {
-  //     router.push('/dashboard');
-  //   }
-  // }, [router]);
-  useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem('token'));
-  }, []);
+// export default function Home() { 
+//   const router = useRouter();
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-      return () => sessionStorage.removeItem('autoRedirect');
-  }, []);
+//   useEffect(() => {
+//     setIsLoggedIn(!!localStorage.getItem('token'));
+//   }, []);
+
+//   useEffect(() => {
+//       return () => sessionStorage.removeItem('autoRedirect');
+//   }, []);
   
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <h1 className="text-4xl font-bold text-primary mb-4 animate-glow">Welcome to the Car Parking System!</h1>
-      <p className="text-lg text-dark mb-8">Find, reserve, and manage parking effortlessly.</p>
-      <div className="flex space-x-4">
-        {isLoggedIn ? (
-          <Link href="/dashboard">
-            <button className="bg-blue-600 text-white px-4 py-2 rounded">Go to Dashboard</button>
-          </Link>
-        ) : (
-          <>
-            <Link href="/auth/login">
-            <button className="bg-primary text-white px-6 py-2 rounded-xl shadow-soft hover:brightness-90 transition-all">Login</button>
-            </Link>
-            <Link href="/auth/register">
-            <button className="bg-secondary text-white px-6 py-2 rounded-xl shadow-soft hover:brightness-90 transition-all">Register</button>
-            </Link>
-          </>
-        )}
-      </div>
-    </div>
+//   return (
+//     // <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+//     <div className='min-h-screen bg-gradient-to-br from-primary via-secondary to-accent flex flex-col items-center justify-center font-sans'
+//       style={{
+//         backgroundImage: "url('/bg-home.jpg')", // Place your image in /public/parking-bg.jpg
+//         backgroundSize: 'cover',
+//         backgroundPosition: 'center',
+//         backgroundRepeat: 'no-repeat',
+//         opacity:10
+//       }} >
+//     <motion.div
+//         initial={{ opacity: 0, y: 40 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 1 }}
+//         className="flex flex-col items-center"></motion.div>
+//         <motion.div
+//           animate={{ y: [0, -10, 0] }}
+//           transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+//         >
+//           <FaCar size={64} className="text-white mb-4" />
+//         </motion.div>
+//       <h1 className="text-4xl font-bold text-primary mb-4 animate-glow">Welcome to the Car Parking System!</h1>
+//       <p className="text-lg text-dark mb-8">Find, reserve, and manage parking effortlessly.</p>
+//       <div className="flex space-x-4">
+//         {isLoggedIn ? (
+//           <Link href="/dashboard">
+//             <button className="bg-blue-600 text-white px-4 py-2 rounded">Go to Dashboard</button>
+//           </Link>
+//         ) : (
+//           <>
+//             <Link href="/auth/login">
+//             <button className="bg-primary text-white px-6 py-2 rounded-xl shadow-soft hover:brightness-90 transition-all">Login</button>
+//             </Link>
+//             <Link href="/auth/register">
+//             <button className="bg-secondary text-white px-6 py-2 rounded-xl shadow-soft hover:brightness-90 transition-all">Register</button>
+//             </Link>
+//           </>
+//         )}
+//       </div>
+//     </div>
 
-  );
+//   );
   // return (
   //   <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
   //     <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -155,4 +163,110 @@ export default function Home() {
   //     </footer>
   //   </div>
   // );
+// }
+"use client";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+import { FaBiking, FaCar } from "react-icons/fa";
+import "./globals.css";
+
+export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("token"));
+  }, []);
+
+  const particlesInit = async (main: any) => {
+    await loadFull(main);
+  };
+
+  return (
+    <div className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center bg-gradient-to-r from-blue-900 via-gray-900 to-black text-white">
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={{
+          background: {
+            color: "transparent",
+          },
+          fpsLimit: 60,
+          particles: {
+            color: { value: "#ffffff" },
+            links: {
+              color: "#ffffff",
+              distance: 150,
+              enable: true,
+              opacity: 0.2,
+              width: 1,
+            },
+            move: {
+              enable: true,
+              speed: 2,
+            },
+            number: {
+              value: 50,
+            },
+            opacity: {
+              value: 0.3,
+            },
+            shape: {
+              type: "circle",
+            },
+            size: {
+              value: 3,
+            },
+          },
+        }}
+      />
+
+      {/* Glassmorphism Card */}
+      <motion.div
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="backdrop-blur-md bg-white/10 p-12 rounded-3xl shadow-lg text-center"
+        style={{ zIndex: 1 }}
+      >
+        <motion.div
+          animate={{ y: [0, -15, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        >
+          <FaCar size={64} className="text-primary mb-4" />
+          <FaBiking size={64} className="text-primary mb-4" />
+        </motion.div>
+        <h1 className="text-5xl font-extrabold mb-6 text-gradient">ParkEase</h1>
+        <p className="text-lg mb-8 text-gray-300">
+          Find, reserve, and manage parking with ease.
+        </p>
+
+        {isLoggedIn ? (
+          <Link href="/dashboard">
+            <button className="px-8 py-3 bg-primary rounded-full text-white text-lg font-semibold hover:bg-opacity-90 transition-all">
+              Go to Dashboard
+            </button>
+          </Link>
+        ) : (
+          <div className="flex space-x-4">
+            <Link href="/auth/login">
+              <button className="px-8 py-3 bg-green-500 rounded-full text-white text-lg font-semibold hover:bg-opacity-90 transition-all">
+                Login
+              </button>
+            </Link>
+            <Link href="/auth/register">
+              <button className="px-8 py-3 bg-blue-600 rounded-full text-white text-lg font-semibold hover:bg-opacity-90 transition-all">
+                Register
+              </button>
+            </Link>
+          </div>
+        )}
+      </motion.div>
+
+      {/* Background Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-700 to-purple-900 opacity-20 z-0"></div>
+    </div>
+  );
 }
