@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import "./globals.css"
+import { useEffect } from 'react';
+import "../../globals.css";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' });
+  // const [myVariable, setMyVariable] = useState(null);
   const [message, setMessage] = useState('');
   const router = useRouter();
 
@@ -34,7 +36,9 @@ export default function LoginPage() {
         console.log('res :', res);
         const data = await res.json();
         // Save JWT token to localStorage or cookies
+        localStorage.setItem('userEmail', form.email);
         localStorage.setItem('token', data.token);
+        localStorage.setItem('userId', data.userId);
         //Trigger storage event to update navbar
         window.dispatchEvent(new Event('storage')); 
         router.push('/dashboard'); // Redirect to dashboard or home
