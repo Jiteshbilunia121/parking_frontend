@@ -1,9 +1,21 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
+ */
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Button Ripple Effect */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text-gradient {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+
 
 @theme inline {
   --color-background: var(--background);
@@ -18,9 +30,16 @@
     --foreground: #ededed;
   }
 }
-
+/* 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
 }
+
