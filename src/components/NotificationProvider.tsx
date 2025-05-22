@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from 'react';
-import saveFcmToken from '@/app/api/save-fcm-token';
+// import saveFcmToken from '../app/api/save-fcm-token';
 
 export default function NotificationProvider() {
   useEffect(() => {
