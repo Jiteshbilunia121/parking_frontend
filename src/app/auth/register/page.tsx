@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import "./globals.css";
+import "../../globals.css";
 
 export default function RegisterPage() {
   const [form, setForm] = useState({ name: '', email: '', password: '' , role: 'USER'});
