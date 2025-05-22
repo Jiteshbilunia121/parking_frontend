@@ -64,11 +64,12 @@ import { getFirebaseMessaging } from '@/lib/firebaseClient';
 import toast from 'react-hot-toast';
 import { registerFcmToken } from '@/components/registerFCMtoken';
 
-declare global {
-  interface Navigator {
-    vibrate?: (pattern: number | number[]) => boolean;
-  }
-}
+// declare global {
+//   interface Navigator {
+//     vibrate: (pattern: number | number[]) => boolean;
+//   }
+// }
+
 
 const NotificationHandler = () => {
   useEffect(() => {
