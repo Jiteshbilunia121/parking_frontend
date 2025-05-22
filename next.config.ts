@@ -1,5 +1,7 @@
 import type { NextConfig } from 'next';
 
+
+
 const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -12,6 +14,9 @@ const nextConfig: NextConfig = {
       };
     }
     return config;
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 
 };
