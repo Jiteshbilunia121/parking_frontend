@@ -8,8 +8,8 @@ import {
     Pin,
     InfoWindow
 } from '@vis.gl/react-google-maps';
-
-const cities = [
+type CityName = keyof typeof parkingSpots;
+const cities: {name: CityName; lat: number; lng: number}[] = [
     { name: "Delhi", lat: 28.679079, lng: 77.069710 },
     { name: "Mumbai", lat: 19.076090, lng: 72.877426 },
     { name: "Bangalore", lat: 12.972442, lng: 77.580643 },
