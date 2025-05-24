@@ -195,6 +195,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Lottie from 'react-lottie-player';
 import successAnimation from '@/app/animations/success-tick.json';
 import { FaCar, FaMotorcycle, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { headers } from 'next/headers';
 
 // Separate client component for the booking content
 function BookSlotContent() {
@@ -214,11 +215,36 @@ function BookSlotContent() {
     setUserId(localStorage.getItem('userId'));
   }, []);
 
+  // useEffect(() => {
+  //   fetch(`${process.env.NEXT_PUBLIC_PARKING_API_URL}/api/parking/availability`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setSlots(data || []);
+  //       setLoading(false);
+  //     });
+  // }, [city, spot]);
+
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_PARKING_API_URL}/api/parking/availability`)
-      .then(res => res.json())
+    setLoading(true);
+
+    fetch(`${process.env.NEXT_PUBLIC_PARKING_API_URL}/api/parking/availability`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'true'
+      }
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`API error: ${res.status}`);
+        }
+        return res.json();
+      })
       .then(data => {
         setSlots(data || []);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching slots:', error);
+        setSlots([]);
         setLoading(false);
       });
   }, [city, spot]);
