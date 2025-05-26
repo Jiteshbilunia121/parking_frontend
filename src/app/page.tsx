@@ -168,10 +168,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
-import { FaBiking, FaCar } from "react-icons/fa";
+import Particles from "react-particles";
+import { loadSlim } from "tsparticles-slim";
+import { FaBiking, FaCar, FaStar, FaQuoteLeft} from "react-icons/fa";
 import "./globals.css";
+import { Engine } from "tsparticles-engine";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -180,8 +181,8 @@ export default function Home() {
     setIsLoggedIn(!!localStorage.getItem("token"));
   }, []);
 
-  const particlesInit = async (main: any) => {
-    await loadFull(main);
+  const particlesInit = async (engine: Engine) => {
+    await loadSlim(engine);
   };
 
   return (
@@ -228,7 +229,7 @@ export default function Home() {
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="backdrop-blur-md bg-white/10 p-12 rounded-3xl shadow-lg text-center"
+        className="backdrop-blur-md bg-white/10 p-12 rounded-3xl shadow-lg text-center mt-20"
         style={{ zIndex: 1 }}
       >
         <motion.div
@@ -264,9 +265,66 @@ export default function Home() {
           </div>
         )}
       </motion.div>
+      {/* Testimonials Section */}
+      <section className="mt-16 w-full max-w-3xl z-10">
+        <h2 className="text-3xl font-bold text-center mb-8">What Our Users Say</h2>
+        <div className="flex flex-col md:flex-row gap-6 justify-center">
+          <Testimonial
+            name="Amit Sharma"
+            text="ParkEase made finding a parking spot in the city so easy and stress-free. Highly recommended!"
+            rating={5}
+          />
+          <Testimonial
+            name="Priya Singh"
+            text="The booking process was smooth and the payment was secure. Will use again!"
+            rating={4}
+          />
+        </div>
+      </section>
+
+      {/* Footer */}
+
+      <footer className="w-full mt-16 py-6 bg-black bg-opacity-60 text-gray-300 text-center z-10">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
+          <div className="mb-2 md:mb-0">
+            &copy; {new Date().getFullYear()} ParkEase. All rights reserved.
+          </div>
+          <div className="flex space-x-4">
+            <Link href="/about" className="hover:text-white">About</Link>
+            <Link href="/contact" className="hover:text-white">Contact</Link>
+            <Link href="/privacy" className="hover:text-white">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white">Terms</Link>
+          </div>
+        </div>
+      </footer>
+
 
       {/* Background Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-700 to-purple-900 opacity-20 z-0"></div>
+
+    </div>
+  );
+}
+
+function Testimonial({
+  name,
+  text,
+  rating,
+}: {
+  name: string;
+  text: string;
+  rating: number;
+}) {
+  return (
+    <div className="bg-white/10 rounded-xl p-6 flex-1 shadow-md">
+      <FaQuoteLeft className="text-primary text-2xl mb-2" />
+      <p className="italic mb-4">"{text}"</p>
+      <div className="flex items-center mb-2">
+        {Array.from({ length: rating }).map((_, i) => (
+          <FaStar key={i} className="text-yellow-400 mr-1" />
+        ))}
+      </div>
+      <div className="font-semibold">{name}</div>
     </div>
   );
 }
