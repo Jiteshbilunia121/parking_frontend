@@ -3,13 +3,13 @@ importScripts('https://www.gstatic.com/firebasejs/10.5.0/firebase-messaging.js')
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+  apiKey: "AIzaSyByM18xmud1BmAA7ZIUubM6tyK4syx-BA8",
+  authDomain: "parking-notification-f3e64.firebaseapp.com",
+  projectId: "parking-notification-f3e64",
+  storageBucket: "parking-notification-f3e64.firebasestorage.app",
+  messagingSenderId: "172771117353",
+  appId: "1:172771117353:web:355089e0975a8948cc0f38",
+  measurementId: "G-N2LLTT8W57"
 };
 
 firebase.initializeApp(firebaseConfig);
