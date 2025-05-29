@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useEffect } from 'react';
 import {
     APIProvider,
     Map,
@@ -52,10 +53,16 @@ const parkingSpots = {
 };
 
 export default function FindParkingPage() {
+
     const [selectedCity, setSelectedCity] = useState(cities[0]);
     const [zoom, setZoom] = useState(12);
+    const [center, setCenter] = useState({ lat: selectedCity.lat, lng: selectedCity.lng });
     const [selectedSpot, setSelectedSpot] = useState<null | any>(null);
 
+    useEffect(() => {
+        setCenter({ lat: selectedCity.lat, lng: selectedCity.lng });
+        setZoom(12); // Optionally reset zoom when city changes
+    }, [selectedCity]);
 
     return (
         <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
@@ -75,14 +82,16 @@ export default function FindParkingPage() {
                 </select>
                 <div className="w-full max-w-4xl h-[50vh] sm:h-[60vh] rounded-xl overflow-hidden shadow-lg">
                     <Map mapId={process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID}
-                        defaultZoom={zoom}
-                        defaultCenter={{ lat: selectedCity.lat, lng: selectedCity.lng }}
-                        center={{ lat: selectedCity.lat, lng: selectedCity.lng }}
-                        // zoom={zoom}
+                        center={center}
+                        zoom={zoom}
+                        onCameraChanged={ev => {
+                            setCenter(ev.detail.center);
+                            setZoom(ev.detail.zoom);
+                        }}
                         style={{ width: '100%', height: '100%' }}
                         gestureHandling="greedy"
-
                     >
+                    
                         {parkingSpots[selectedCity.name].map((spot, idx) => (
                             <AdvancedMarker
                                 key={idx}
