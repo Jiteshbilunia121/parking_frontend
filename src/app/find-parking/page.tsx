@@ -77,8 +77,8 @@ export default function FindParkingPage() {
                     <Map mapId={process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID}
                         defaultZoom={zoom}
                         defaultCenter={{ lat: selectedCity.lat, lng: selectedCity.lng }}
-                        center={{ lat: selectedCity.lat, lng: selectedCity.lng }}
-                        zoom={zoom}
+                        // center={{ lat: selectedCity.lat, lng: selectedCity.lng }}
+                        // zoom={zoom}
                         style={{ width: '100%', height: '100%' }}
                         gestureHandling="greedy"
 
