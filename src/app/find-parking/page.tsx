@@ -9,6 +9,7 @@ import {
     Pin,
     InfoWindow
 } from '@vis.gl/react-google-maps';
+import { FaCar } from 'react-icons/fa';
 type CityName = keyof typeof parkingSpots;
 const cities: {name: CityName; lat: number; lng: number}[] = [
     { name: "Delhi", lat: 28.679079, lng: 77.069710 },
@@ -102,13 +103,9 @@ export default function FindParkingPage() {
                                     animation: selectedSpot?.name === spot.name ? "bounce 0.5s" : "none"
                                 }}
                             >
-                                {/* <Pin background="#10B981" glyphColor="#fff" borderColor="#111827" />
-                                 */}
-                                <Pin
-                                    background={selectedSpot?.name === spot.name ? "#2563eb" : "#10B981"}
-                                    glyphColor="#fff"
-                                    borderColor="#111827"
-                                />
+                                <Pin background="#10B981" glyphColor="#fff" borderColor="#111827">
+                                    <FaCar size={18} />
+                                </Pin>
                             </AdvancedMarker>
                         ))}
                         {selectedSpot && (
