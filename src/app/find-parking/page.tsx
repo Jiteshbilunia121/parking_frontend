@@ -98,6 +98,9 @@ export default function FindParkingPage() {
                                 position={{ lat: spot.lat, lng: spot.lng }}
                                 title={spot.name}
                                 onClick={() => setSelectedSpot(spot)}
+                                style={{
+                                    animation: selectedSpot?.name === spot.name ? "bounce 0.5s" : "none"
+                                }}
                             >
                                 <Pin background="#10B981" glyphColor="#fff" borderColor="#111827" />
                             </AdvancedMarker>
