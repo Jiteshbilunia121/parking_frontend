@@ -102,7 +102,13 @@ export default function FindParkingPage() {
                                     animation: selectedSpot?.name === spot.name ? "bounce 0.5s" : "none"
                                 }}
                             >
-                                <Pin background="#10B981" glyphColor="#fff" borderColor="#111827" />
+                                {/* <Pin background="#10B981" glyphColor="#fff" borderColor="#111827" />
+                                 */}
+                                <Pin
+                                    background={selectedSpot?.name === spot.name ? "#2563eb" : "#10B981"}
+                                    glyphColor="#fff"
+                                    borderColor="#111827"
+                                />
                             </AdvancedMarker>
                         ))}
                         {selectedSpot && (
